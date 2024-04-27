@@ -1,0 +1,346 @@
+body {
+	margin: 0;
+	background: midnightblue; /* Dark Blue */
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	color: darkorange;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+body {
+	color: white
+}
+
+table {
+	background: white;
+	border-collapse: separate;
+	border-spacing: 5px 1em;
+}
+
+tr {
+	color: black;
+	border: white;
+	border-collapse: collapse; /* Unisce i bordi delle celle */
+	padding: 3px; /* Aggiunge spazio interno alle caselle */
+	text-align: center;
+}
+
+th {
+	color: midnightblue;
+	background: white;
+	text-align: center;
+}
+
+td {
+	color: black;
+	background: white;
+}
+
+.category {
+	color: darkorange;
+	background: #2196F3;
+	border-radius: 5px;
+	font-size: 30px;
+	padding: 10px;
+	border-collapse: separate;
+}
+
+caption {
+	background: #2196F3;
+	padding: 10px;
+}
+
+.suppliers table, .products table, .showProduct table, table.cart, table.orders
+	{
+	border: 3px solid #2196F3;
+	border-spacing: 0;
+}
+
+.products th, .suppliers th, .showProduct th, .cart th, .orders th {
+	background: darkorange;
+	color: midnightblue;
+	border-right: 2px solid #2196F3;
+}
+
+.suppliers td, .products td, .showProduct td, .cart td, .orders td {
+	border-right: 2px solid #2196F3;
+	border-top: 2px solid #2196F3;
+}
+
+td.productImage {
+	width: 100px; /* Imposta una larghezza minima per la cella */
+	height: 100px;
+}
+
+td.button-cart, td.button-order {
+	width: 180px;
+	border: unset;
+	text-align: center;
+}
+
+a:link, a:visited {
+	background-color: #00003E; /* Light Red */
+	border-radius: 5px;
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none; /* rimuove sottolineatura */
+	display: inline-block;
+}
+
+a:hover, a:active {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav {
+	overflow: hidden;
+	background: #00003E;
+	height: 48px;
+}
+
+.topnav a {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	border-radius: 0px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #2196F3;
+	color: white;
+}
+
+a.logout:link, a.logout:visited {
+	background-color: #f44336; /* Light Red */
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none; /* rimuove sottolineatura */
+	display: inline-block; /* bottone */
+}
+
+a.logout:hover, a.logout:active {
+	background-color: red;
+}
+
+input {
+	color: white;
+	background: #00003E;
+	padding: 6px 10px;
+	margin-top: 8px;
+	font-size: 17px;
+	border: none;
+	text-align: center;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	/* Rimuovi il margine inferiore causato dalle immagini inline */
+	aspect-ratio: 3/2;
+	object-fit: contain;
+}
+
+.products img, .showProduct img {
+	width: 100%;
+	aspect-ratio: 3/2;
+	object-fit: contain;
+}
+
+.yellow-star {
+	color: gold;
+}
+
+.search-container {
+	float: right;
+	text-align: center;
+}
+
+.search-container input {
+	color: black;
+	background: #ddd;
+	text-align: left;
+}
+
+.search-container button {
+	float: right;
+}
+
+.showProduct input {
+	width: 100px;
+	margin-top: 0;
+	color: black;
+	background: #ddd;
+	text-align: left;
+	margin-left: 10px;
+	float: left;
+}
+
+.showProduct button, .cart button {
+	margin-top: 0;
+	float: left;
+}
+
+.current td {
+	background-color: lightgreen;
+}
+
+.current td.productImage {
+	background-color: white;
+}
+
+.current a {
+	color: black;
+	background-color: lightgreen;
+	cursor: default;
+}
+
+button {
+	color: white;
+	background: darkorange;
+	padding: 6px;
+	margin-top: 8px;
+	margin-right: 16px;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background: darkorange;
+}
+
+.w-grid {
+	background: white;
+	display: grid;
+	grid-template-columns: 30% 70%;
+	grid-gap: 5px;
+}
+
+.w-space {
+	background: white;
+}
+
+div.error {
+	text-align: rigth;
+	display: block;
+}
+
+.error {
+	color: white;
+	border: 3px solid darkred;
+	background: red;
+	text-align: center;
+	padding: 14px 25px;
+	display: inline-block;
+}
+
+.suppliers img, .cart img, .orders img {
+	width: 50%;
+}
+
+.cart li, .orders li {
+	float: left;
+	width: 200px; /* Imposta una larghezza minima per la cella */
+	height: 120px;
+	text-align: left;
+	white-space: normal;
+}
+
+table.cart, table.orders, .products table, .suppliers table,
+	.showProduct table {
+	width: 100%;
+}
+
+table.cart, table.orders {
+	white-space: nowrap; /* Serve a non andare a capo nella cella */
+}
+
+.cart td, .orders td {
+	padding: 10px;
+	vertical-align: top;
+}
+
+.products {
+	grid-column: 1;
+}
+
+.showProduct {
+	grid-column: 2;
+}
+
+img.logo {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+	display: block;
+	aspect-ratio: auto;
+}
+
+div.login {
+	width: 300px;
+	margin: auto;
+	display: block;
+	text-align: center;
+	background: #2196F3;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+.logoMenu {
+	display: block;
+	width: 40px;
+	margin-left: -8px;
+	margin-top: -12px;
+	float: left;
+	aspect-ratio: auto;
+}
+
+.num-products {
+	color: white;
+	background: midnightblue;
+	border-radius: 5px;
+	padding: 10px;
+	border-collapse: separate;
+}
+
+.floating-window {
+	display: none;
+	position: absolute;
+	z-index: -1;
+	color: black;
+	background: lightgreen;
+	border: 3px solid green;
+	border-radius: 5px;
+	text-align: center;
+	padding: 14px 25px;
+	max-width: 50%;
+	max-height: 50%;
+}
+
+.floating-list {
+	padding: 0;
+	margin: 0;
+}
+
+.floating-list li {
+	text-align: left;
+}

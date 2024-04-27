@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>FStore</title>
+<script src="utils.js" charset="utf-8" defer></script>
+<script src="ecommerce.js" charset="utf-8" defer></script>
+<link rel="stylesheet" type="text/css" media="all"
+	href="./css/mystyle.css" />
+</head>
+<body>
+	<div align="right">
+		<a class="logout" href="Logout">Logout</a>
+	</div>
+	<div>
+		<h1>Welcome to FStore</h1>
+		<h2>
+			Hi, <span id="id_welcomeMessage">Username</span>
+		</h2>
+	</div>
+	<div>
+		<h1>Welcome to the Research Page</h1>
+		<h2>
+			You searched for: "<span id="id_researchMessage">Nothing</span>"
+		</h2>
+	</div>
+	<div id="id_cartMessage">
+		<h1>This is your Shopping Cart Page</h1>
+		<h2>You can order from each supplier</h2>
+	</div>
+	<div id="id_ordersMessage">
+		<h1>This is your Orders Page</h1>
+		<h2>You can view your orders history</h2>
+	</div>
+
+
+	<div id="id_menu" class="topnav">
+		<a id="home" href="#"> <img class="logoMenu" src="Logo FStore senza sfondo.png" alt="Logo FStore" />Home</a> 
+		<a id="orders" href="#">&#x1F4E6; Orders</a> 
+		<a id="cart" href="#">&#x1F6D2; Cart</a>
+
+		<div class="search-container">
+			<form id="id_searchForm" action="#">
+				<input type="text" placeholder="Search in FStore.." name="keyword"
+					required />
+				<button id="id_searchButton">&#x1F50D;</button>
+			</form>
+		</div>
+	</div>
+	<div id="id_suggestedProducts"></div>
+
+	<div class="w-grid" id="researchDiv">
+		<div class="products">
+
+			<table>
+				<caption>Products</caption>
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+
+				<tbody id="id_researchedProducts">
+				</tbody>
+			</table>
+
+		</div>
+		<div class="showProduct">
+			<div class="error" id="id_alertNoProduct">Wrong product
+				requested</div>
+			<table>
+				<caption>Selected Product</caption>
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Category</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody id="id_detailsProduct">
+				</tbody>
+			</table>
+
+			<br>
+
+			<div class="error">
+				No supplier sell this product (<span id="id_alertSuppliers">ProductName</span>)
+			</div>
+			<table>
+				<caption align="top">Suppliers</caption>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
+						<th>Price</th>
+						<th>Spending Ranges</th>
+						<th>Free Shipping</th>
+						<th># Products</th>
+						<th>Products Price</th>
+					</tr>
+				</thead>
+				<tbody id="id_suppliers"></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="w-space" id="id_cartDiv">
+		<table class="cart">
+			<thead>
+				<tr>
+					<th>Suppliers</th>
+					<th>Products</th>
+					<th>Products Price</th>
+					<th>Shipping Price</th>
+				</tr>
+			</thead>
+			<tbody id="id_listCart">
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="w-space" id="id_ordersDiv">
+		<table class="orders">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Supplier</th>
+					<th>Products</th>
+					<th>Total Price</th>
+					<th>Shipment Date</th>
+					<th>Shipping Address</th>
+				</tr>
+			</thead>
+			<tbody id="id_listOrders">
+			</tbody>
+		</table>
+	</div>
+	<div id="id_alert" class="error"></div>
+	<div id="id_floatingWindow" class="floating-window"></div>
+</body>
+</html>
