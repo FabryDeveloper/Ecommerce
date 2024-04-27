@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Your Shopping Cart</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/mystyle.css}" />
+</head>
+<body>
+
+	<div align="right">
+		<a th:class="logout" th:href="@{/Logout}">Logout</a>
+	</div>
+
+	<h1>This is your Shopping Cart Page</h1>
+	<h2>You can order from each supplier</h2>
+
+	<div th:insert="@{WEB-INF/Menu.html} :: menu"></div>
+
+	<div th:class="w-space" th:if="${productsInCart!=null}">
+		<table th:class="cart"
+			th:if="${productsInCart.keySet().size() > 0}">
+			<thead>
+				<tr>
+					<th>Suppliers</th>
+					<th>Products</th>
+					<th>Products Price</th>
+					<th>Shipping Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="s : ${productsInCart.keySet()}">
+					<td th:text="${s.name}" th:class="supplier-name"></td>
+					<td>
+						<ul th:class="products">
+							<li th:each="p : ${productsInCart.get(s).get(0).keySet()}"
+								th:if="${productsInCart.get(s).get(0).get(p) == 1}"><span
+								th:text="${p.name}">ProductName</span><img
+								th:class="productImage"
+								th:src="@{'data:image/jpeg;base64,' + ${p.photo}}"
+								alt="Immagine" /></li>
+							<li th:each="p : ${productsInCart.get(s).get(0).keySet()}"
+								th:if="${productsInCart.get(s).get(0).get(p) > 1}">
+								<span>[<span th:text="${productsInCart.get(s).get(0).get(p)}"></span>]
+							</span> <span th:text="${p.name}">ProductName</span> <img
+								th:class="productImage"
+								th:src="@{'data:image/jpeg;base64,' + ${p.photo}}"
+								alt="Immagine" /></li>
+						</ul>
+					</td>
+					<td><span
+						th:text="${#numbers.formatDecimal(productsInCart.get(s).get(1), 1, 'POINT', 2, 'COMMA')}">0</span>
+						&euro;</td>
+					<td><span
+						th:text="${#numbers.formatDecimal(productsInCart.get(s).get(2), 1, 'POINT', 2, 'COMMA')}">0</span>
+						&euro;</td>
+					<td th:class="button-order">
+						<form th:action="@{/CreateOrder}" method="POST">
+							<input type="hidden" name="supplierid" th:value="${s.id}">
+							<button type="submit" name="submit">Order</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div
+		th:if="${productsInCart == null or productsInCart.keySet().size() == 0}"
+		th:class="error">No products for any supplier</div>
+</body>
+</html>

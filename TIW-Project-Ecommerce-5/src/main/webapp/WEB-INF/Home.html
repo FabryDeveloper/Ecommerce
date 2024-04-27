@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home FStore</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/mystyle.css}" />
+</head>
+<body>
+	<div align="right">
+		<a th:class="logout" th:href="@{/Logout}">Logout</a>
+	</div>
+
+	<h1>Welcome to the FStore Home Page</h1>
+	<h2
+		th:text="${'Hi, ' + session.user.name + ' ' + session.user.surname}"></h2>
+		
+	<div th:insert="@{WEB-INF/Menu.html} :: menu"></div>
+
+	<div th:if="${products.size() >0}">
+		<table>
+			<thead>
+				
+				<tr>
+					<th th:class="category" th:each="p : ${products}"
+						th:text="${p.category}"></th>
+				</tr>
+				<tr>
+					<th th:each="p : ${products}"><img
+						th:src="@{'data:image/jpeg;base64,' + ${p.photo}}" alt="Immagine" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td align="center" th:each="p : ${products}"><a
+						th:href="@{/GoToResearch(keyword = ${p.name})}"
+						th:text="${p.name}"></a></td>
+				</tr>
+				<tr>
+					<td th:each="p : ${products}" th:text="${p.description}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${products.size() == 0}" th:class="error">No products on offer</div>
+</body>
+</html>
