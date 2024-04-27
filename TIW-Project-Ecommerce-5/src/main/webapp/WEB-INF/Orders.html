@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Order on FStore</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/mystyle.css}" />
+</head>
+<body>
+
+	<div align="right">
+		<a th:class="logout" th:href="@{/Logout}">Logout</a>
+	</div>
+
+	<h1>This is your Orders Page</h1>
+	<h2>You can view your orders history</h2>
+
+	<div th:insert="@{WEB-INF/Menu.html} :: menu"></div>
+
+	<div th:class="w-space" th:if="${orders!=null}">
+		<table th:class="orders"
+			th:if="${orders.keySet().size() > 0}">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Supplier</th>
+					<th>Products</th>
+					<th>Total Price</th>
+					<th>Shipment Date</th>
+					<th>Shipping Address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="o : ${orders.keySet()}">
+					<td th:text="${o.id}" th:class="order-id"></td>
+					<td th:text="${orders.get(o).get(1)}"></td>
+					<td>
+						<ul th:class="products">
+							<li th:each="p : ${orders.get(o).get(0).keySet()}">
+								<span th:if="${orders.get(o).get(0).get(p) == 1}" 
+									th:text="${'[' + orders.get(o).get(0).get(p) + ']'}"></span>
+								<span th:text="${p.name}">ProductName</span>
+								<span th:text="${'(ID:' +p.id + ')'}"></span>
+								<img
+								th:class="productImage"
+								th:src="@{'data:image/jpeg;base64,' + ${p.photo}}"
+								alt="Immagine" /></li>
+			
+						</ul>
+					</td>
+					<td><span
+						th:text="${#numbers.formatDecimal(o.price, 1, 'POINT', 2, 'COMMA')}">0</span>
+						&euro;</td>
+					<td th:text="${#dates.format(o.shipment, 'MMM dd, yyyy')}"></td>
+					<td th:text="${orders.get(o).get(2)}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div
+		th:if="${orders == null or orders.keySet().size() == 0}"
+		th:class="error">You have no orders<br><a th:href="@{/GoToHome}">Go Shopping!</a></div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="menu" th:class="topnav">
+		<a th:class="${(#strings.equals(#request.getRequestURI(), (#request.contextPath + '/GoToHome'))) ? 'active' : ''}" th:href="@{/GoToHome}">
+		<img class="logoMenu" src = "Logo FStore senza sfondo.png" alt="Logo FStore"/>Home</a>
+		<a th:class="${(#strings.equals(#request.getRequestURI(), (#request.contextPath + '/GoToOrders'))) ? 'active' : ''}" th:href="@{/GoToOrders}">&#x1F4E6; Orders</a>
+		<a th:class="${(#strings.equals(#request.getRequestURI(), (#request.contextPath + '/GoToCart'))) ? 'active' : ''}" th:href="@{/GoToCart}">&#x1F6D2; Cart</a>
+		
+		<div th:class="search-container">
+			<form th:action="@{/GoToResearch}" method="GET">
+				<input type="text" placeholder="Search in FStore.." name="keyword"
+					required />
+				<button type="submit">&#x1F50D;</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

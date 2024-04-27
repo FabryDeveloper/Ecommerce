@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Research In FStore</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/mystyle.css}" />
+</head>
+<body>
+
+	<div align="right">
+		<a th:class="logout" th:href="@{/Logout}">Logout</a>
+	</div>
+
+	<h1>Welcome to the Research Page</h1>
+	<h2>
+		You searched for: "<span th:text="${#request.getParameter('keyword')}">Nothing</span>"
+	</h2>
+
+	<div th:insert="@{WEB-INF/Menu.html} :: menu"></div>
+
+	<div th:class="w-grid">
+		<div th:class="products">
+
+			<table th:if="${products.keySet().size()>0}">
+				<caption>Products</caption>
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="p : ${products.keySet()}"
+						th:class="(${showProduct != null} and ${p.id} == ${showProduct.id}) ? 'current'">
+						<td th:class="productImage"><img
+							th:src="@{'data:image/jpeg;base64,' + ${p.photo}}" alt="Immagine" /></td>
+						<td th:text="${p.id}"></td>
+						<td><a href="Research.html"
+							th:href="@{/GoToResearch(productid=${p.id}, keyword=${#request.getParameter('keyword')})}"><span
+								th:text="${p.name}"></span></a></td>
+						<td><span
+							th:text="${#numbers.formatDecimal(products.get(p), 1, 'POINT', 2, 'COMMA')}">0</span>
+							&euro;</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+		<div th:if="${showProduct != null}" th:class="showProduct">
+
+			<table>
+				<caption>Selected Product</caption>
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Category</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td th:class="productImage"><img
+							th:src="@{'data:image/jpeg;base64,' + ${showProduct.photo}}"
+							alt="Immagine" /></td>
+						<td th:text="${showProduct.id}"></td>
+						<td th:text="${showProduct.name}"></td>
+						<td><span
+							th:text="${#numbers.formatDecimal(showProductPrice, 1, 'POINT', 2, 'COMMA')}">0</span>
+							&euro;</td>
+						<td><span th:class="category"
+							th:text="${showProduct.category}">Category</span></td>
+						<td th:text="${showProduct.description}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br>
+
+			<div th:if="${#sets.isEmpty(showSuppliers.keySet())}"
+				th:class="error">
+				No supplier sell this product (<span th:text="${showProduct.name}">ProductName</span>)
+			</div>
+			<table>
+				<caption align="top">Suppliers</caption>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
+						<th>Price</th>
+						<th>Spending Ranges</th>
+						<th>Free Shipping</th>
+						<th># Products</th>
+						<th>Products Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="s : ${showSuppliers.keySet()}">
+						<td th:text="${s.name}"></td>
+						<td th:class="yellow-star"><span
+							th:each="r : ${#numbers.sequence(1, s.rating)}">&#9733;</span></td>
+						<td><span
+							th:text="${#numbers.formatDecimal(showSuppliers.get(s).get(0), 1, 'POINT', 2, 'COMMA')}"></span>
+							&euro;</td>
+
+						<td><span th:if="${showSuppliers.get(s).get(1).size() == 0}">No
+								spending<br>ranges
+						</span> <span th:each="sRange : ${showSuppliers.get(s).get(1)}">
+							<span th:text="${sRange.min}"></span> 
+							<span th:if="${sRange.max == 0}">></span>
+								<span th:if="${sRange.max != 0}"> - <span
+									th:text="${sRange.max}"></span>
+							</span> (<span
+								th:text="${#numbers.formatDecimal(sRange.price, 1, 'POINT', 2, 'COMMA')}"></span>
+								&euro;)<br>
+						</span>
+						</td>
+						<td><span th:if="${s.freeShipping == null}">No Free
+								Shipping</span> <span th:if="${s.freeShipping != null}">From <span
+								th:text="${#numbers.formatDecimal(s.freeShipping, 1, 'POINT', 2, 'COMMA')}"></span>
+								&euro;
+						</span></td>
+
+						<td th:if="${showSuppliers.get(s).size() < 3}">No other<br>products
+						</td>
+						<td th:if="${showSuppliers.get(s).size() >= 3}"><span
+							th:text="${showSuppliers.get(s).get(2)}"></span></td>
+						<td th:if="${showSuppliers.get(s).size() < 4}">0 &euro;</td>
+						<td th:if="${showSuppliers.get(s).size() >= 4}"><span
+							th:text="${#numbers.formatDecimal(showSuppliers.get(s).get(3), 1, 'POINT', 2, 'COMMA')}">0</span>
+							&euro;</td>
+						<td th:class="button-cart">
+							<form th:action="@{/UpdateCart}" method="POST">
+								<input type="number" placeholder="Quantity.." name="quantity"
+									min=0 required> <input type="hidden" name="productid"
+									th:value="${showProduct.id}"> <input type="hidden"
+									name="supplierid" th:value="${s.id}">
+								<button type="submit" name="submit">&#x1F6D2;</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:if="${products.keySet().size() == 0}" th:class="error">No
+		products found</div>
+</body>
+</html>
