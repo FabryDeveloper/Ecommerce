@@ -2,6 +2,7 @@
 Progetto di Tecnologie Informatiche per il Web (Politecnico di Milano A.A. 2022-2023
 
 [<img src="https://github.com/FabryDeveloper/Ecommerce/blob/main/Loghi/Logo%20FStore.jpeg" width="100" height="100">](https://github.com/FabryDeveloper/Ecommerce/blob/main/Demo%20Ecommerce.mp4)
+
 Project developed in two versions:
 
 | [Pure HTML](https://github.com/FabryDeveloper/Ecommerce/tree/main/TIW-Project-Ecommerce-5) | [RIA (Javascript)](https://github.com/FabryDeveloper/Ecommerce/tree/main/TIW-Project-Ecommerce-5CS) |
